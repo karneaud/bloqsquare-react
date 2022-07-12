@@ -1,0 +1,84 @@
+.container{
+    text-align: center;
+}
+
+.home-screen-text{
+    font-size: 50px;
+    color: #ffeb3b;
+    margin-top: 35px;
+}
+
+input[type=color] {
+    -webkit-appearance: none;
+    width: 64px;
+    height: 64px;
+    background: 0 0;
+    border: none;
+    cursor: pointer;
+}
+
+.color-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+label {
+    color: #9e9e9e;
+    font-size: .8rem;
+}
+
+label.input-color div {
+    width: 100%;
+    height: 54.8px;
+    min-width: 64px;
+    color: #000;
+    flex-direction: column;
+    flex: 1 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: #fff;
+  
+}
+
+.versus-container{
+	width: 50%;
+    margin: 20px auto;
+}
+
+.vs-box{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+    background-color: white;
+   border-radius: 5px;
+   padding: 10px 20px;
+}
+
+.player-header{
+    display: flex;
+    justify-content: space-between;
+    color:#ffeb3b;
+    padding: 0 50px;
+    margin-bottom: 10px;
+}
+
+#player-square{
+    background-color: red;
+}
+
+#machine-square{
+    background-color: purple;
+}
+
+.square{
+	width: 110px;
+    height: 110px;
+}
+
+.vs-box span{
+    font-size: 50px;
+    color: purple;
+}
