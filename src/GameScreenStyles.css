@@ -1,0 +1,19 @@
+.game-container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.game-board{
+	display: grid;
+    row-gap: 0;
+}
+
+.game-square{
+    border: 1px dashed white;
+    cursor: pointer;
+    height: 70px;
+    width: 70px;
+}

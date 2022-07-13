@@ -6,8 +6,13 @@ import ColorPicker from '../ColorPicker'
 import Versus from '../Versus'
 import Button from '../Button'
 import Help from '../Help'
+import Player from '../../helpers/Player'
 
-const HomeScreen:FC = () => {
+interface homeProps{
+  startGame:Function;
+}
+
+const HomeScreen:FC<homeProps> = ({startGame}) => {
   const [color, setColor] = useState("")
 
   const choseColor = (colorPicked:string) => {
@@ -25,13 +30,21 @@ const HomeScreen:FC = () => {
 
 let machineColor = invertHex(color)
 
+const play = () => {
+  const player = new Player(color)
+  const machine = new Player(machineColor, true)
+  startGame(player, machine)
+}
+
   return (
     <div className='container'>
         <Logo marginTop={-5}/>
         <Heading text='Choose Your Color' headingStyle='home-screen-text' />
         <ColorPicker choseColor={choseColor}/>
         <Versus colorPicked={color} machineColor={machineColor}/>
-        <Button text="play" />
+        <span onClick={play}>
+           <Button text="play" /> 
+        </span>
         <Help />
     </div>
   )
