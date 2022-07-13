@@ -14,7 +14,7 @@ const GameScreen:FC<gameScreenProps> = ({player}) => {
   return (
     <div className='game-container'>
        <GameInfo />
-       <GameBoard/>
+       <GameBoard player={player}/>
     </div>
   )
 }
