@@ -7,14 +7,15 @@ import GameInfo from '../GameInfo'
 
 interface gameScreenProps {
   player:Player
+  machine:Player
 }
 
-const GameScreen:FC<gameScreenProps> = ({player}) => {
+const GameScreen:FC<gameScreenProps> = ({player, machine}) => {
    
   return (
     <div className='game-container'>
        <GameInfo />
-       <GameBoard player={player}/>
+       <GameBoard player={player} machine={machine} />
     </div>
   )
 }

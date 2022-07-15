@@ -13,7 +13,7 @@ interface homeProps{
 }
 
 const HomeScreen:FC<homeProps> = ({startGame}) => {
-  const [color, setColor] = useState("red")
+  const [color, setColor] = useState("#ff0000")
 
   const choseColor = (colorPicked:string) => {
     setColor(colorPicked)

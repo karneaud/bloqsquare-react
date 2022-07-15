@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       {screen === 1 && <HomeScreen startGame={startGame} />}
-      {screen === 2 && <GameScreen player={player}/> }
+      {screen === 2 && <GameScreen player={player} machine={machine}/> }
       
     </div>
   );

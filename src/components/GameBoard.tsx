@@ -1,15 +1,42 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Grid from '../helpers/Grid'
 import Player from '../helpers/Player'
 
 interface GameBoardProps{
     player:Player
+    machine:Player
 }
 
-const GameBoard:FC<GameBoardProps> = ({player}) => {
+function generateRandomInteger(max: number): number {
+  return Math.floor(Math.random() * max);
+}
+
+const GameBoard:FC<GameBoardProps> = ({player, machine}) => {
+  const [value, setValue] = useState(0)
  
   const [grid, setGrid] = useState(new Grid(8))
-  const [newPlayer, setNewPlayer] = useState(player)
+
+  useEffect(() => {
+  
+    const computerInterval = setInterval(() => {
+      const randomIndex = generateRandomInteger(
+        grid.gridSize * grid.gridSize
+      )
+      // console.log(randomIndex)
+      // const randomCell = grid.cells[randomIndex]
+      setGrid(prevState => ({
+        ...prevState,
+        cells: prevState.cells.map(
+          cell => cell.index === randomIndex ? {...cell, backgroundColor: machine.chosenColor, isClicked: true} : cell
+        )
+      }))
+       }, 1000)
+
+    
+  }, [])
+  
+  
+  
     const gameStyle = {gridTemplateColumns: `repeat(${grid.gridSize}, 1fr)`}
 
     const squareClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -18,12 +45,12 @@ const GameBoard:FC<GameBoardProps> = ({player}) => {
       setGrid(prevState => ({
         ...prevState,
         cells: prevState.cells.map(
-          cell => cell.index === cellIndex ? {...cell, backgroundColor: newPlayer.chosenColor} : cell
+          cell => cell.index === cellIndex ? {...cell, backgroundColor: player.chosenColor, isClicked: true} : cell
         )
       }))
-      //the above does not work
-      //make grid state
-      //modify the cell and re-render
+      //the above code grabs the id of the clicked element and 
+      //uses that to change the bg color of the cell in the cells
+      //list in the grid, then react rerenders
     }
 
   return (
@@ -33,10 +60,10 @@ const GameBoard:FC<GameBoardProps> = ({player}) => {
                 <div 
                 key={cell.index} 
                 id={`${cell.index}`} 
-                className='game-square' 
-                style={{background: cell.backgroundColor}}
+                className={cell.isClicked ? 'game-square clicked': "game-square" }
+                style={{backgroundColor: cell.backgroundColor}}
                 onClick={(e) => squareClicked(e)}
-                ></div>
+                > </div>
             )
         })}
     </div>
