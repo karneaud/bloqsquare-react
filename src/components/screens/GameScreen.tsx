@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState} from 'react'
 import "../../GameScreenStyles.css"
 import Grid from '../../helpers/Grid'
 import Player from '../../helpers/Player'
@@ -11,11 +11,17 @@ interface gameScreenProps {
 }
 
 const GameScreen:FC<gameScreenProps> = ({player, machine}) => {
+  const [playerScore, setPlayerScore] = useState(0)
+  const [machineScore, setMachineScore] = useState(0)
+
+
+ const incrementPlayerScore = () => setPlayerScore(prev => prev + 1)
+ const decrementPlayerScore = () => setPlayerScore(prev => prev - 1)
    
   return (
     <div className='game-container'>
-       <GameInfo />
-       <GameBoard player={player} machine={machine} />
+       <GameInfo score={`${playerScore}pts`} headingStyle="score-board"/>
+       <GameBoard player={player} machine={machine} incrementPlayerScore={incrementPlayerScore} decrementPlayerScore={decrementPlayerScore}/>
     </div>
   )
 }

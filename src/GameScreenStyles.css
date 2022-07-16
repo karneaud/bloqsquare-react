@@ -21,3 +21,13 @@
 .game-square.clicked{
     cursor: unset;
 }
+
+.score-board{
+    background-color: #ffeb3b;
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+    color: #0006;
+    font-size: 35px;
+    padding: 5px;
+}

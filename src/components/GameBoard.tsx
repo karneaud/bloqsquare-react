@@ -2,19 +2,47 @@ import React, { FC, useState, useEffect } from 'react'
 import Grid from '../helpers/Grid'
 import Player from '../helpers/Player'
 
+
 interface GameBoardProps{
     player:Player
     machine:Player
+   incrementPlayerScore:Function
+   decrementPlayerScore:Function
 }
 
 function generateRandomInteger(max: number): number {
   return Math.floor(Math.random() * max);
 }
 
-const GameBoard:FC<GameBoardProps> = ({player, machine}) => {
-  const [value, setValue] = useState(0)
+const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, decrementPlayerScore}) => {
+ 
  
   const [grid, setGrid] = useState(new Grid(8))
+
+
+  const handleSquareClicked = (index:number, player:Player, opponent:Player) => {
+    setGrid(prevState => ({
+      ...prevState,
+      cells: prevState.cells.map( (cell) => {
+        if(cell.index === index){
+          if(cell.isClicked){
+            if(cell.backgroundColor === opponent.chosenColor){
+              return {...cell, backgroundColor: "transparent", isClicked: false}
+            } else{
+              if(!player.isComputer) decrementPlayerScore()
+              return cell //here is where to put d code for if a player click his own square
+            }
+          } else{
+            player.isComputer ? machine.totalPoints++ : incrementPlayerScore()
+            return {...cell, backgroundColor: player.chosenColor, isClicked: true}
+          }
+        } else {
+          return cell
+        }
+       } )
+    }))
+  
+  }
 
   useEffect(() => {
   
@@ -22,17 +50,15 @@ const GameBoard:FC<GameBoardProps> = ({player, machine}) => {
       const randomIndex = generateRandomInteger(
         grid.gridSize * grid.gridSize
       )
-      // console.log(randomIndex)
-      // const randomCell = grid.cells[randomIndex]
-      setGrid(prevState => ({
-        ...prevState,
-        cells: prevState.cells.map(
-          cell => cell.index === randomIndex ? {...cell, backgroundColor: machine.chosenColor, isClicked: true} : cell
-        )
-      }))
+      
+      handleSquareClicked(randomIndex, machine, player)
+      console.log(machine.totalPoints)
        }, 1000)
 
-    
+       
+
+       
+
   }, [])
   
   
@@ -42,15 +68,7 @@ const GameBoard:FC<GameBoardProps> = ({player, machine}) => {
     const squareClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
       let square = e.target as HTMLDivElement
       let cellIndex = parseInt(square.id)
-      setGrid(prevState => ({
-        ...prevState,
-        cells: prevState.cells.map(
-          cell => cell.index === cellIndex ? {...cell, backgroundColor: player.chosenColor, isClicked: true} : cell
-        )
-      }))
-      //the above code grabs the id of the clicked element and 
-      //uses that to change the bg color of the cell in the cells
-      //list in the grid, then react rerenders
+      handleSquareClicked(cellIndex, player, machine)
     }
 
   return (
