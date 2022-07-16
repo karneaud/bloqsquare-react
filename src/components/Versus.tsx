@@ -3,9 +3,11 @@ import React, { FC } from 'react'
 interface versusProps{
   colorPicked:string;
   machineColor:string;
+  playerScore?:number;
+  machineScore?:number;
 }
 
-const Versus:FC<versusProps> = ({colorPicked, machineColor}) => {
+const Versus:FC<versusProps> = ({colorPicked, machineColor, playerScore, machineScore}) => {
   
 
 
@@ -17,9 +19,9 @@ const Versus:FC<versusProps> = ({colorPicked, machineColor}) => {
             <h3>A.I.</h3>
         </div>
         <div className="vs-box">
-            <div id="player-square" style={{backgroundColor: colorPicked}} className="square"></div>
+            <div id="player-square" style={{backgroundColor: colorPicked}} className="square">{playerScore}</div>
             <span style={{color: machineColor}}>vs</span>
-            <div id="machine-square" className="square" style={{backgroundColor: machineColor}}></div>
+            <div id="machine-square" className="square" style={{backgroundColor: machineColor}}>{machineScore}</div>
         </div>
     </div>
   )

@@ -8,13 +8,14 @@ interface GameBoardProps{
     machine:Player
    incrementPlayerScore:Function
    decrementPlayerScore:Function
+   incrementMachineScore:Function
 }
 
 function generateRandomInteger(max: number): number {
   return Math.floor(Math.random() * max);
 }
 
-const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, decrementPlayerScore}) => {
+const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, decrementPlayerScore, incrementMachineScore}) => {
  
  
   const [grid, setGrid] = useState(new Grid(8))
@@ -33,7 +34,7 @@ const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, de
               return cell //here is where to put d code for if a player click his own square
             }
           } else{
-            player.isComputer ? machine.totalPoints++ : incrementPlayerScore()
+            player.isComputer ? incrementMachineScore() : incrementPlayerScore()
             return {...cell, backgroundColor: player.chosenColor, isClicked: true}
           }
         } else {
@@ -55,7 +56,7 @@ const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, de
       console.log(machine.totalPoints)
        }, 1000)
 
-       
+       return () => clearInterval(computerInterval)
 
        
 

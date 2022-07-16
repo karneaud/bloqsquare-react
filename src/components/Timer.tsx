@@ -1,18 +1,22 @@
 import React, { FC, useEffect, useState } from 'react'
 
 const Timer:FC = () => {
-    const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(30);
+    const [minutes, setMinutes] = useState(1);
 
     let timer:any;
     useEffect(() => {
       
         timer = setInterval(() => {
-            setSeconds(seconds+1)
+            setSeconds(seconds-1)
 
-            if(seconds === 50){
-                setMinutes(minutes+1)
-                setSeconds(0)
+            if(seconds === 0){
+                setMinutes(minutes-1)
+                setSeconds(59)
+            }
+
+            if(minutes === 0 && seconds === 0){
+                console.log("done")
             }
         }, 1000)
     
@@ -22,14 +26,12 @@ const Timer:FC = () => {
 
 
   return (
-    <div className="timer">
-        <div className="container">
+    
             <div className="timer-container">
-                <h1>{minutes}: {seconds}</h1>
+                <h1>00:{minutes < 10 ? "0"+minutes: minutes}:{seconds<10?"0"+seconds:seconds}</h1>
             </div>
 
-        </div>
-    </div>
+      
   )
 }
 
