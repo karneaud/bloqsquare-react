@@ -1,7 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
 
-const Timer:FC = () => {
-    const [seconds, setSeconds] = useState(30);
+interface timerProps{
+    gameOver:Function
+}
+
+const Timer:FC<timerProps> = ({gameOver}) => {
+    const [seconds, setSeconds] = useState(10);
     const [minutes, setMinutes] = useState(1);
 
     let timer:any;
@@ -16,9 +20,9 @@ const Timer:FC = () => {
             }
 
             if(minutes === 0 && seconds === 0){
-                console.log("done")
+                gameOver()
             }
-        }, 1000)
+        }, 300)
     
       return () => clearInterval(timer)
     })

@@ -5,9 +5,10 @@ interface size {
 }
 
 const Logo:FC<size> = ({width, marginTop}) => {
+  
   const imageStyle = {width, marginTop}
   return (
-    <img style={imageStyle} className='' src="./logo.png" alt="bloqsquare logo" />
+    <img style={imageStyle} src="./logo.png" alt="bloqsquare logo" />
   )
 }
 

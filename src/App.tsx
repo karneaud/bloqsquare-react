@@ -7,7 +7,7 @@ import Player from './helpers/Player';
 function App() {
   const [screen, setScreen] = useState(1)
   const [player, setPlayer] = useState(new Player("red"))
-  const [machine, setMachine] = useState(new Player("blue", false))
+  const [machine, setMachine] = useState(new Player("blue", true))
 
   const startGame = (newPlayer:Player, newMachine:Player) => {
     setPlayer(newPlayer);
@@ -27,12 +27,17 @@ function App() {
     setScreen(3)
   }
 
+  const restartGame = () => {
+    setPlayer(new Player("#ff0000"))
+    setMachine(new Player("#0000FF", true))
+    setScreen(1)
+  }
 
   return (
     <div className="App">
       {screen === 1 && <HomeScreen startGame={startGame} />}
       {screen === 2 && <GameScreen player={player} machine={machine} endGame={endGame}/> }
-     {screen === 3 && <GameOverScreen colorPicked={player.chosenColor} machineColor={machine.chosenColor}  />}
+     {screen === 3 && <GameOverScreen player={player} machine={machine} restartGame={restartGame} />}
     </div>
   );
 }

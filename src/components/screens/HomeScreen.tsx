@@ -36,9 +36,12 @@ const play = () => {
   startGame(player, machine)
 }
 
+let width = 500;
+if(window.innerWidth < 500 && width) width = width/2
+
   return (
     <div className='container'>
-        <Logo marginTop={-5}/>
+        <Logo marginTop={-5} width={width}/>
         <Heading text='Choose Your Color' headingStyle='home-screen-text' />
         <ColorPicker choseColor={choseColor}/>
         <Versus colorPicked={color} machineColor={machineColor}/>

@@ -1,15 +1,18 @@
 import React, { FC } from 'react'
+import Player from '../../helpers/Player'
 import Button from '../Button'
 import Heading from '../Heading'
 import Logo from '../Logo'
 import Versus from '../Versus'
+import "../../GameOverScreenStyles.css"
 
 interface gameOverProps{
-    colorPicked:string
-    machineColor:string
+    player:Player;
+    machine:Player;
+    restartGame:Function;
 }
 
-const GameOverScreen:FC<gameOverProps> = ({colorPicked, machineColor}) => {
+const GameOverScreen:FC<gameOverProps> = ({player, machine, restartGame}) => {
   return (
     <div className="game-over-container">
         <div className="game-over">
@@ -17,8 +20,11 @@ const GameOverScreen:FC<gameOverProps> = ({colorPicked, machineColor}) => {
             <Heading text="Game Over" headingStyle='home-screen-text'/>
         </div>
     <div className="results-container">
-    <Versus colorPicked={colorPicked} machineColor={machineColor} />
-    <Button text='Play Again' />
+    <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} playerScore={player.totalPoints} machineScore={machine.totalPoints} />
+   <span onClick={() => restartGame()}>
+   <Button text='Play Again' />
+   </span>
+    
     </div>
         
     </div>

@@ -54,7 +54,7 @@ const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, de
       
       handleSquareClicked(randomIndex, machine, player)
       console.log(machine.totalPoints)
-       }, 1000)
+       }, 500)
 
        return () => clearInterval(computerInterval)
 
