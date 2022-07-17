@@ -37,4 +37,4 @@ const Timer: FC<timerProps> = ({ gameOver }) => {
     )
 }
 
-export default Timer
+export default React.memo(Timer)

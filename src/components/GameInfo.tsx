@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import Logo from "./Logo";
+import Score from "./Score";
 import Timer from "./Timer";
 
 interface gameInfoProps {
@@ -17,13 +18,7 @@ const GameInfo: FC<gameInfoProps> = ({ score, gameOver }) => {
       <header className="container-fluid">
         <div className="dashboard row">
           <Timer gameOver={gameOver} />
-          <div className="center-align col s12">
-            <div className="points yellow z-depth-2">
-              <div>
-                <span id="points">{score}</span>pts.
-              </div>
-            </div>
-          </div>
+          <Score score={score} />
         </div>
       </header>
     </article>
