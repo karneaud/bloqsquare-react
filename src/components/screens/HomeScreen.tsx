@@ -37,7 +37,7 @@ const play = () => {
 }
 
 let width = 500;
-if(window.innerWidth < 500 && width) width = width/2
+if(window.innerWidth < 900 && width) width = width/2
 
   return (
     <div className='container'>

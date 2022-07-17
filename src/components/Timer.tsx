@@ -5,8 +5,8 @@ interface timerProps{
 }
 
 const Timer:FC<timerProps> = ({gameOver}) => {
-    const [seconds, setSeconds] = useState(10);
-    const [minutes, setMinutes] = useState(1);
+    const [seconds, setSeconds] = useState(40);
+    const [minutes, setMinutes] = useState(0);
 
     let timer:any;
     useEffect(() => {

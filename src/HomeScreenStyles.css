@@ -162,7 +162,7 @@ label.input-color div {
     right: 20px
   }
 
-  @media (max-width: 600px){
+  @media (max-width: 800px){
     .versus-container{
         width: 90%;
     }

@@ -48,18 +48,11 @@
     text-align: center;
 }
 
-
-
-@media(max-width: 800px){
+@media(max-width: 1000px){
     .game-container{
         display: flex;
         flex-direction: column;
         height: unset;
-    }
-
-    .game-square{
-        height: 45px;
-        width: 45px;
     }
 
     .timer-container{
@@ -71,4 +64,13 @@
     .game-board{
         margin: 30px 0;
     }
+}
+
+
+@media(max-width: 800px){
+    .game-square{
+        height: 60px;
+        width: 60px;
+    }
+
 }

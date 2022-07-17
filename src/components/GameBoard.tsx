@@ -17,8 +17,10 @@ function generateRandomInteger(max: number): number {
 
 const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, decrementPlayerScore, incrementMachineScore}) => {
  
+  let gridSize = 8
+  if(window.innerWidth < 500 ) gridSize = 6
  
-  const [grid, setGrid] = useState(new Grid(8))
+  const [grid, setGrid] = useState(new Grid(gridSize))
 
 
   const handleSquareClicked = (index:number, player:Player, opponent:Player) => {
@@ -54,7 +56,7 @@ const GameBoard:FC<GameBoardProps> = ({player, machine, incrementPlayerScore, de
       
       handleSquareClicked(randomIndex, machine, player)
       console.log(machine.totalPoints)
-       }, 500)
+       }, 300)
 
        return () => clearInterval(computerInterval)
 
