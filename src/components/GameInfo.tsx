@@ -1,25 +1,33 @@
-import React, { FC } from 'react'
-import Heading from './Heading'
-import Logo from './Logo'
-import Timer from './Timer';
+import React, { FC } from "react";
+import Logo from "./Logo";
+import Timer from "./Timer";
 
-
-
-interface gameInfoProps{
-  score:string;
-  headingStyle:string;
-  gameOver:Function
-
+interface gameInfoProps {
+  score: number;
+  gameOver: Function;
 }
 
-const GameInfo:FC<gameInfoProps> = ({score, headingStyle, gameOver}) => {
+const GameInfo: FC<gameInfoProps> = ({ score, gameOver }) => {
   return (
-    <div className='score'>
-        <Logo width={300}/>
-        <Timer gameOver={gameOver}/>
-        <Heading text={score} headingStyle={headingStyle} />
-    </div>
-  )
-}
+    <article>
+      <header>
+        <Logo />
+      </header>
 
-export default GameInfo
+      <header className="container-fluid">
+        <div className="dashboard row">
+          <Timer gameOver={gameOver} />
+          <div className="center-align col s12">
+            <div className="points yellow z-depth-2">
+              <div>
+                <span id="points">{score}</span>pts.
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </article>
+  );
+};
+
+export default GameInfo;
