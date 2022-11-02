@@ -76,7 +76,9 @@ function App() {
         {screen.value === 2 && <GameScreen />}
         {screen.value === 3 && <GameOverScreen />}
         {screen.value === 4 && <YouLoseScreen />}
+
       </Suspense>
+
       <InstallPWA />
       <Help />
     </main>

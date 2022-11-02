@@ -34,7 +34,7 @@ const initialState: GameData = {
   currentLevel: 0,
   gameState: "start",
   gameSettings: {
-    countDown: 30000,
+    countDown: 10000,
     computerSpeed: 1200,
     ratio: { ratioToWinRound: 0.75, ratioDuration: 5000 },
     lastLevel: 7,

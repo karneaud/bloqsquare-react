@@ -1,10 +1,7 @@
 import { memo, FC, useEffect, useRef } from "react";
 import Countdown from "react-countdown";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
-import { setScreen } from "../../redux/screen";
-import { setMachineScore } from "../../redux/machine";
-import { setPlayerScore } from "../../redux/player";
-import { incrementLevel, LevelData, setGameState } from "../../redux/gameData";
+import { LevelData, setGameState } from "../../redux/gameData";
 import { Howl } from "howler";
 
 interface countdownProps {
@@ -15,6 +12,7 @@ interface countdownProps {
 
 interface timer {
     playerPoints: number
+    machinePoints: number
     levelData: LevelData
     lastLevel: number
     countDown: number
@@ -26,17 +24,11 @@ function areEqual(prevProps: timer, nextProps: timer) {
     }
 }
 
-const Timer: FC<timer> = ({ levelData, playerPoints, lastLevel, countDown }) => {
-    const { timeSfxPath, endAudioPath } = useAppSelector((state) => state.audio);
+const Timer: FC<timer> = ({ levelData, countDown }) => {
+    const { timeSfxPath } = useAppSelector((state) => state.audio);
 
     const bgMusic = new Howl({
         src: [timeSfxPath],
-        preload: true,
-        volume: 0.15,
-    });
-
-    const endAudio = new Howl({
-        src: [endAudioPath],
         preload: true,
         volume: 0.15,
     });
@@ -53,46 +45,27 @@ const Timer: FC<timer> = ({ levelData, playerPoints, lastLevel, countDown }) => 
     const handleStart = () => clockRef.current.start();
     // @ts-ignore
     const handleStop = () => clockRef.current.stop();
-
+    const timer = useRef(0)
 
     //for bg music
     useEffect(() => {
 
-        let timer: number;
+
         setTimeout(() => {
-            timer = window.setInterval(() => bgMusic.play(), 2000);
-            handleStart();
+            if (gameState === "start") {
+                timer.current = window.setInterval(() => bgMusic.play(), 2000);
+                handleStart();
+            }
+
         }, 300);
 
 
         return () => {
-            return clearInterval(timer);
+            return clearInterval(timer.current);
         };
-    }, [level]);
-
-    //called at the end of each level
-    useEffect(() => {
-        if (gameState === "end") {
-            handleStop()
-            if (playerPoints >= 0) {
-                if (level === lastLevel) endGame()
-                dispatch(incrementLevel())
-                dispatch(setPlayerScore(0))
-                dispatch(setMachineScore(0))
-            } else {
-                dispatch(setScreen(4))
-            }
-            dispatch(setGameState("start"))
-        }
+    }, [level, gameState]);
 
 
-    }, [gameState])
-
-
-    const endGame = () => {
-        endAudio.play();
-        dispatch(setScreen(3));
-    };
 
 
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {

@@ -14,7 +14,7 @@ interface TableRowProps {
 
 
 const GameBoard: FC<TableRowProps> = ({ gameData }) => {
-    const { levels, currentLevel, gameSettings } = gameData
+    const { levels, currentLevel, gameSettings, gameState } = gameData
     let { computerSpeed, ratio } = gameSettings
     const { ratioToWinRound, ratioDuration } = ratio
     const levelData = levels[currentLevel]
@@ -70,17 +70,20 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
     //to make computer click square
     useEffect(() => {
         const time = setInterval(() => {
-            const randomSquare = getRandomInt(0, y * x);
-            const rowStart = Math.floor(randomSquare / x)
+            if (gameState === "start") {
+                const randomSquare = getRandomInt(0, y * x);
+                const rowStart = Math.floor(randomSquare / x)
 
 
-            handleSquareClick(rowStart, randomSquare, colors.machineColor, colors.playerColor, true)
+                handleSquareClick(rowStart, randomSquare, colors.machineColor, colors.playerColor, true)
+            }
+
         }, computerSpeed - (currentLevel * 80))
         return () => clearInterval(time)
 
 
 
-    }, [handleSquareClick, levelData])
+    }, [handleSquareClick, levelData, gameState])
 
     //to win/lose via % of squares controlled
     useEffect(() => {
