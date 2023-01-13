@@ -5,11 +5,6 @@ import { LevelData, setGameState } from "../../redux/gameData";
 import { Howl } from "howler";
 import { useRafCounter } from "../../helpers/useRafCounter";
 
-interface countdownProps {
-    minutes: number;
-    seconds: number;
-    milliseconds: number;
-}
 
 interface timer {
     playerPoints: number
@@ -66,20 +61,7 @@ const Timer: FC<timer> = ({ levelData, countDown }) => {
 
         }
 
-        // if (Math.round(count) % 3 === 0) bgMusic.play()
 
-        // setTimeout(() => {
-        //     if (gameState === "start") {
-        //         timer.current = window.setInterval(() => bgMusic.play(), 2000);
-
-        //     }
-
-        // }, 300);
-
-
-        // return () => {
-        //     return clearInterval(timer.current);
-        // };
     }, [level, gameState, count]);
 
 
@@ -89,9 +71,7 @@ const Timer: FC<timer> = ({ levelData, countDown }) => {
         const minutes = d.getUTCMinutes()
         const seconds = d.getUTCSeconds()
         const milliseconds = d.getUTCMilliseconds()
-        // const milliseconds = count * 1000
-        // const seconds = Math.floor((milliseconds / 1000) % 60)
-        // const minutes = Math.floor((milliseconds / 1000 / 60))
+
         return `${minutes < 10 ? "0" + minutes : minutes}  :
                  ${seconds < 10 ? "0" + seconds : seconds} :
                 ${milliseconds < 100

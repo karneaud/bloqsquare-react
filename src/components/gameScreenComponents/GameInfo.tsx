@@ -51,6 +51,8 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
 
         }
 
+        return () => setNextLevelModal(false)
+
 
     }, [gameState])
 
@@ -87,7 +89,7 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
 
                             <div onClick={() => setNextLevelModal(false)} className="modal-content">
 
-                                <p>You won this level! Click to proceed</p>
+                                <p>You won this level! <br /> Click to proceed</p>
                             </div>
 
                         </div>
