@@ -32,7 +32,7 @@ function App() {
 
   const fetchGameData = async () => {
     try {
-      console.log(process.env.REACT_APP_GAMEDATA_URL)
+
       const response = await fetch(
         process.env.REACT_APP_GAMEDATA_URL
       );
