@@ -31,6 +31,7 @@ function App() {
   }, []);
 
   const fetchGameData = async () => {
+
     try {
 
       const response = await fetch(
@@ -41,6 +42,7 @@ function App() {
       dispatch(setGameData(levels))
       dispatch(setLastLevel(levels.length))
       localStorage.setItem("levels", JSON.stringify(levels))
+
 
     } catch (error) {
       let levelsString = localStorage.getItem("levels");
