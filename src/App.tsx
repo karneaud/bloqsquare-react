@@ -28,6 +28,7 @@ function App() {
   const fetchGameData = async () => {
     try {
       const response = await fetch(process.env.REACT_APP_GAMEDATA_URL);
+      console.log(process.env.REACT_APP_GAMEDATA_URL);
       const data: ApiData = await response.json();
       let levels = data.response.data;
       dispatch(setGameData(levels));
