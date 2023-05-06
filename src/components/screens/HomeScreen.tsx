@@ -7,8 +7,8 @@ import { useAppSelector, useAppDispatch } from "../../redux/redux-hooks";
 import { setPlayerColor } from "../../redux/player";
 import { setMachineColor } from "../../redux/machine";
 import { setScreen } from "../../redux/screen";
+import { setGameState } from "../../redux/gameData";
 // import { setComputerSpeed, setCountDown, setRatio } from "../../redux/gameData";
-
 
 const HomeScreen = () => {
   const player = useAppSelector((state) => state.player);
@@ -22,7 +22,6 @@ const HomeScreen = () => {
   //   dispatch(setComputerSpeed(computerSpeed))
   //   dispatch(setRatio(ratio))
   // }
-
 
   function invertHex(hex: string) {
     hex = hex.substring(1);
@@ -40,6 +39,7 @@ const HomeScreen = () => {
 
   const play = () => {
     dispatch(setScreen(2));
+    dispatch(setGameState("start"));
   };
 
   return (
