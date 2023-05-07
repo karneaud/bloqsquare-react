@@ -39,7 +39,8 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
         player.totalPoints >= machine.totalPoints
         // && player.totalPoints >= levelData.grade
       ) {
-        if (level === lastLevel) endGame();
+        //change this back to lastLevel
+        if (level === 3) endGame();
         setNextLevelModal(true);
         endAudio.play();
       } else {
@@ -81,8 +82,9 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
             playerPoints={player.totalPoints}
             machinePoints={machine.totalPoints}
           />
-          <Score score={player.totalPoints} />
-          <Button text={`Level: ${level}`} />
+          <Score score={player.totalPoints} isPlayer={true} />
+          <Score score={machine.totalPoints} isPlayer={false} />
+          <p className="level-text">Level: {level}</p>
 
           {nextLevelModal && (
             <div className="modal">
