@@ -39,14 +39,10 @@ const Square: FC<SquareRowProps> = ({
     const { youSfxPath, opponentSfxPath } = useAppSelector(state => state.audio)
     const youSfx = new Howl({
         src: [youSfxPath],
-        preload: true,
-        volume: 1,
     });
 
     const opponentSfx = new Howl({
         src: [opponentSfxPath],
-        preload: true,
-        volume: 1,
     });
 
 

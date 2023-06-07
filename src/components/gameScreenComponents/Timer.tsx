@@ -1,14 +1,10 @@
-import { memo, FC, useEffect, useRef } from "react";
-import Countdown from "react-countdown";
+import { memo, FC, useEffect, useRef, useState } from "react";
+// import Countdown from "react-countdown";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { LevelData, setGameState } from "../../redux/gameData";
 import { Howl } from "howler";
+import { useRafCounter } from "../../helpers/useRafCounter";
 
-interface countdownProps {
-    minutes: number;
-    seconds: number;
-    milliseconds: number;
-}
 
 interface timer {
     playerPoints: number
@@ -25,6 +21,7 @@ function areEqual(prevProps: timer, nextProps: timer) {
 }
 
 const Timer: FC<timer> = ({ levelData, countDown }) => {
+    const [count, setCount] = useState(countDown)
     const { timeSfxPath } = useAppSelector((state) => state.audio);
 
     const bgMusic = new Howl({
@@ -38,61 +35,56 @@ const Timer: FC<timer> = ({ levelData, countDown }) => {
     const dispatch = useAppDispatch();
     const { level } = levelData
 
-
-
-    const clockRef = useRef();
     // @ts-ignore
-    const handleStart = () => clockRef.current.start();
-    // @ts-ignore
-    const handleStop = () => clockRef.current.stop();
-    const timer = useRef(0)
+    useRafCounter(deltaTime => {
+        if (gameState === "start") {
+            setCount(prevCount => (prevCount - deltaTime * 0.001) % 100)
+        }
 
-    //for bg music
+    })
+
+
+
+
     useEffect(() => {
 
-
-        setTimeout(() => {
-            if (gameState === "start") {
-                timer.current = window.setInterval(() => bgMusic.play(), 2000);
-                handleStart();
-            }
-
-        }, 300);
-
-
-        return () => {
-            return clearInterval(timer.current);
-        };
-    }, [level, gameState]);
+        if (gameState === "end") {
+            setCount(countDown)
+        }
 
 
 
+        if (count <= 0) {
+            dispatch(setGameState("end"))
+            setCount(countDown)
 
-    const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
-        return (
-            <time>
-                {minutes < 10 ? "0" + minutes : minutes} :
-                {seconds < 10 ? "0" + seconds : seconds} :
-                {milliseconds < 100
-                    ? "0".concat(Math.round(milliseconds / 10).toString())
-                    : Math.round(milliseconds / 10)}
-            </time>
-        );
-    };
+
+        }
+
+
+    }, [level, gameState, count]);
+
+
+
+    function getTimeString() {
+        const d = new Date(Date.UTC(0, 0, 0, 0, 0, 0, count * 1000))
+        const minutes = d.getUTCMinutes()
+        const seconds = d.getUTCSeconds()
+        const milliseconds = d.getUTCMilliseconds()
+
+        return `${minutes < 10 ? "0" + minutes : minutes}  :
+                 ${seconds < 10 ? "0" + seconds : seconds} :
+                ${milliseconds < 100
+                ? "0".concat(Math.round(milliseconds / 10).toString())
+                : Math.round(milliseconds / 10)} `
+    }
+
 
     return (
         <div className="col s12">
             <div className="clock pink-text silom">
                 {" "}
-                <Countdown
-                    ref={clockRef}
-                    date={Date.now() + countDown}
-                    intervalDelay={0}
-                    precision={2}
-                    renderer={renderer}
-                    onComplete={() => dispatch(setGameState("end"))}
-                    autoStart={false}
-                />
+                {getTimeString()}
             </div>
         </div>
     );

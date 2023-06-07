@@ -4,6 +4,7 @@ import { setMachineScore } from '../../redux/machine'
 import { setPlayerScore } from '../../redux/player'
 import { useAppSelector, useAppDispatch } from '../../redux/redux-hooks'
 import { setScreen } from '../../redux/screen'
+import "../../loseScreen.css"
 
 const YouLoseScreen = () => {
     const player = useAppSelector(state => state.player)
@@ -22,14 +23,15 @@ const YouLoseScreen = () => {
     }
 
     return (
-        <div>
-            <h1>You Lose!</h1>
+        <div className='lose-section'>
+            <div className='loss-box'>
+                <h1>You Lose!</h1>
 
-            <div>Your Score: {player.totalPoints}</div>
+                <h2>Your Score: {player.totalPoints}</h2>
 
-            <div>Score Needed to Advance: {currentLevelData.grade}</div>
+                <button className="btn-larger fit-80 pink" onClick={restartGame}>Retry</button>
+            </div>
 
-            <button onClick={restartGame}>Play Again</button>
         </div>
     )
 }
