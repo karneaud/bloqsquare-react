@@ -21,13 +21,13 @@ const TableRow: FC<TableRowProps> = ({ row, rowNum, colors, handleSquareClick })
 
 
     return (
-        <tr>
+        <>
             {row.map(cell => {
                 return (
                     <Square rowNum={rowNum} key={cell.index} cell={cell} colors={colors} handleSquareClick={handleSquareClick} />
                 )
             })}
-        </tr>
+        </>
     )
 }
 
