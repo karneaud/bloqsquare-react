@@ -1,11 +1,7 @@
 
-const Logo = () => {
+const Logo = ( classNames: any ) => {
   return (
-    <div className="row">
-      <div className="center-align col s12">
-        <img className="logo logo-md" src="./logo.png" alt="bloqsquare logo" />
-      </div>
-    </div>
+    <img className={ `logo ${classNames}`} title="Bloq Square" src="/logo.png"/>
   );
 };
 
