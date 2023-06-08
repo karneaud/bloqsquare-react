@@ -1,5 +1,4 @@
 import Logo from "../Logo";
-import Heading from "../homeScreenComponents/Heading";
 import ColorPicker from "../homeScreenComponents/ColorPicker";
 import Versus from "../Versus";
 import Button from "../Button";
@@ -45,27 +44,31 @@ const HomeScreen = () => {
   return (
     <section className="home">
       <header>
-        <Logo />
-        <Heading />
+          <div className="row">
+            <div className="center-align col s12">
+              <Logo classNames="logo-md" />
+            </div>
+          </div>
       </header>
       <article>
+      <header className="container">
+        <h2 className="center-align heading silom">Choose Your Color</h2>
+      </header>
         <div className="container">
           <div className="row">
             <div className="col s12 center-align">
-              <ColorPicker choseColor={choseColor} value={player.chosenColor} />
+            <ColorPicker choseColor={choseColor} value={player.chosenColor} />
             </div>
           </div>
           <div className="row">
-            <div className="col s12">
               <Versus
                 colorPicked={player.chosenColor}
                 machineColor={machine.chosenColor}
               />
-            </div>
           </div>
           <div className="row">
             <div className="center-align col s12" onClick={play}>
-              <Button text="play" />
+              <Button className="btn-large fit-80 pink" text="play" />
             </div>
           </div>
         </div>
