@@ -6,14 +6,9 @@ interface scoreProps {
 
 const Score: FC<scoreProps> = ({ score, isPlayer }) => {
   return (
-    <div className="center-align col s12">
-      <div className={`points ${isPlayer ? "yellow-text" : "pink-text"} silom`}>
-        <div>
-          <span id="points">
-            {isPlayer ? "Player" : "Computer"}: {score}pts
-          </span>
-        </div>
-      </div>
+    <div className="col s6">
+      <span className={`points ${isPlayer ? "yellow-text" : "pink-text"} silom`}>{isPlayer ? "You" : "A.I."}: {score}pts
+        </span>
     </div>
   );
 };
