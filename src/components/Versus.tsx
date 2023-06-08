@@ -14,22 +14,24 @@ const Versus: FC<versusProps> = ({ colorPicked, machineColor, playerScore, machi
 
   return (
     <div className="col s12">
-      <table className="centered grid-3 scores">
-        <thead><tr><th>You</th><th></th><th>A.I.</th></tr></thead>
-        <tbody style={{ "backgroundColor": "#ffffff" }}>
+      <table className="scores">
+        <tbody>
           <tr>
-            <td className="color" style={{ "--color": colorPicked } as React.CSSProperties}>
+            <th>You</th>
+            <th rowSpan={2} className='centered bloq large purple-text'>V.S.
+            </th>
+            <th>A.I.</th>
+          </tr>
+          <tr>
+            <td colSpan={1} className="color" style={{ "--color": colorPicked } as React.CSSProperties}>
               <span className="bloq square" title={playerScore || playerScore === 0 ? `${playerScore}` : ""}></span>
             </td>
-            <td>
-              <span className="bloq large purple-text text-z-depth-2">VS</span>
-            </td>
-            <td className="color" style={{ "--color": machineColor } as React.CSSProperties}>
+            <td colSpan={1} className="color" style={{ "--color": machineColor } as React.CSSProperties}>
               <span className="bloq square" title={machineScore || machineScore === 0 ? `${machineScore}` : ""}></span>
             </td>
           </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
     </div>
   )
 }
