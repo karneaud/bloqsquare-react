@@ -28,7 +28,6 @@ function App() {
   const fetchGameData = async () => {
     try {
       const response = await fetch(process.env.REACT_APP_GAMEDATA_URL);
-      console.log(process.env.REACT_APP_GAMEDATA_URL);
       const data: ApiData = await response.json();
       let levels = data.response.data;
       dispatch(setGameData(levels));
@@ -50,10 +49,13 @@ function App() {
     right: 0,
     textAlign: "center",
     width: "100%",
+    height: "100%",
+    top:0,
+    bottom:0
   };
 
   return (
-    <main className="App container valign-wrapper">
+    <>
       {screen.value === 1 && <HomeScreen />}
       <Suspense
         fallback={
@@ -70,10 +72,9 @@ function App() {
         {screen.value === 3 && <GameOverScreen />}
         {screen.value === 4 && <YouLoseScreen />}
       </Suspense>
-
       <InstallPWA />
       <Help />
-    </main>
+    </>
   );
 }
 
