@@ -59,6 +59,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-howler": "^5.2.0"
+    "@types/react-howler": "^5.2.0",
+    "eruda": "^3.0.0"
   }
 }
