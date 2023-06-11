@@ -26,36 +26,28 @@ const GameOverScreen = () => {
         dispatch(setScreen(1))
     }
 
-    return (
-        <section className="leaderboard">
-            <article>
-                <header>
-                    <div className="row">
-                        <div className="center-align col s12">
-                            {" "}
-                            <Logo />{" "}
-                        </div>
-                    </div>
+    return (<>
+        <section className="content-body leaderboard">
+            <header className="content-top text-center">
+                <Logo classNames="margin-auto-x" />
+            </header>
+            <article className="content-bottom">
+                <header className="container">
+                    <h1 className="center-align heading silom">Game Over!</h1>
                 </header>
-                <header className="container-fluid">
-                    <h2 className="center-align heading silom">Congratulations you've completed all levels!</h2>
-                </header>
-            </article>
-            <article>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row">
                         <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} playerScore={player.totalGamePoints} machineScore={machine.totalGamePoints} />
-                    </div>
-                    <div className="row">
-                        <div className="center-align col s12">
-                            <span onClick={restartGame}>
-                                <Button text='Play Again' />
-                            </span>
-                        </div>
                     </div>
                 </div>
             </article>
         </section>
+        <aside className="content-footer">
+            <span onClick={restartGame}>
+                <Button className="btn btn-larger pink" text='Play Again' />
+            </span>
+        </aside>
+        </>
     );
 };
 
