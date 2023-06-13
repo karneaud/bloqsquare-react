@@ -4523,7 +4523,7 @@ input[type=color]+div span{
     width:auto;
     height:100%;
     max-width:100%;
-    max-height:inherit
+    max-height:inherit;
 }
 .logo.-fit{
     width:100%;
@@ -4876,3 +4876,18 @@ body{
         padding:12px 0
     }
 }
+#setup_button {
+    display: block;
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    color: white;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+  }
