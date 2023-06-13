@@ -14,7 +14,7 @@ const Help = () => {
             <div className="row">
               <div className="center-align col s12">
                 <div className="container">
-                  <Logo />
+                  <Logo classNames="logo-md -fit" />
                 </div>
               </div>
               <div className="center-align col s12">
