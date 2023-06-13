@@ -46,7 +46,7 @@ const HomeScreen = () => {
       <header>
           <div className="row">
             <div className="center-align col s12">
-              <Logo classNames="logo-md" />
+              <Logo classNames="logo-md -fit" />
             </div>
           </div>
       </header>
