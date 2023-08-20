@@ -81,10 +81,9 @@ const Timer: FC<timer> = ({ levelData, countDown }) => {
 
 
     return (
-        <div className="col s12">
-            <div className="clock pink-text silom">
-                {" "}
-                {getTimeString()}
+        <div className="col s6">
+            <div className="clock silom">
+                <time className="pink-text">{getTimeString()}</time>
             </div>
         </div>
     );

@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { Howl } from "howler";
 
 
-
 interface SquareRowProps {
     cell: Cell;
     rowNum: number
@@ -67,14 +66,14 @@ const Square: FC<SquareRowProps> = ({
     };
 
     return (
-        <td
+        <div
             className="color"
             key={cell.index}
             style={{ "--color": cell.backgroundColor } as React.CSSProperties}
             onClick={squareClicked}
         >
             <span id={`${cell.index}`} className="square"></span>
-        </td>
+        </div>
     );
 };
 

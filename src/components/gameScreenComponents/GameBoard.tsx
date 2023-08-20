@@ -82,7 +82,6 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
       if (gameState === "start") {
         const randomSquare = getRandomInt(0, y * x);
         const rowStart = Math.floor(randomSquare / x);
-
         handleSquareClick(
           rowStart,
           randomSquare,
@@ -139,13 +138,9 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
   }
 
   return (
-    <article className="game-play">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="center-align col no-padding s12">
-            <table className={`board grid-${x}`}>
-              <tbody>
-                {board.map((row, i) => {
+    <div className="game-play">
+      <div className={`board grid-${x}`}>
+          {board.map((row, i) => {
                   return (
                     <TableRow
                       key={i}
@@ -156,12 +151,8 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
                     />
                   );
                 })}
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
-    </article>
   );
 };
 

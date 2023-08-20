@@ -30,15 +30,17 @@ const InstallPWA = () => {
         return null;
     }
     return (
-        <button
-            className="button-7"
+        <a href=""
+            className=""
             id="setup_button"
             aria-label="Install app"
             title="Install app"
             onClick={onClick}
         >
-            Install
-        </button>
+            <span className="material-symbols-outlined">
+ios_share
+</span>
+        </a>
     );
 };
 
