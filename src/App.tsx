@@ -5,6 +5,7 @@ import HomeScreen from "./components/screens/HomeScreen";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { LevelData, setGameData, setLastLevel } from "./redux/gameData";
 import { useAppDispatch, useAppSelector } from "./redux/redux-hooks";
+import { isAndroid } from "react-device-detect";
 const GameScreen = lazy(() => import("./components/screens/GameScreen"));
 const GameOverScreen = lazy(
   () => import("./components/screens/GameOverScreen")
@@ -30,6 +31,7 @@ function App() {
       const response = await fetch(process.env.REACT_APP_GAMEDATA_URL);
       const data: ApiData = await response.json();
       let levels = data.response.data;
+
       dispatch(setGameData(levels));
       dispatch(setLastLevel(levels.length));
       localStorage.setItem("levels", JSON.stringify(levels));
@@ -50,8 +52,8 @@ function App() {
     textAlign: "center",
     width: "100%",
     height: "100%",
-    top:0,
-    bottom:0
+    top: 0,
+    bottom: 0,
   };
 
   return (
@@ -72,7 +74,8 @@ function App() {
         {screen.value === 3 && <GameOverScreen />}
         {screen.value === 4 && <YouLoseScreen />}
       </Suspense>
-      <InstallPWA />
+      {!isAndroid && <InstallPWA />}
+
       <Help />
     </>
   );
